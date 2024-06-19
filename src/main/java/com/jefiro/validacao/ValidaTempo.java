@@ -17,8 +17,6 @@ public class ValidaTempo {
     public String expiraData() {
         LocalDateTime dataAtual = LocalDateTime.parse(data, formatter);
         LocalDateTime dataExpira = dataAtual.plusMinutes(15);
-        System.out.println(data);
-        System.out.println(dataExpira.format(formatter));
         return dataExpira.format(formatter);
     }
     public Boolean comparaHoras(String horaAtual, String horaExpirar){

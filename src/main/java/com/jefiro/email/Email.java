@@ -9,24 +9,24 @@ public class Email {
     private final String CORPO2 = "SEU COODIGO DE VERIFICAÇÃO: ";
     private final String CORPO3 = " LEMBRE-SE SEU CODIGO FICARA DISPONIVEL POR 15 MINUTOS";
     private final IdGenerete id = new IdGenerete();
-    private final ValidarEmail valida = new ValidarEmail(id.id());
-    public void enviarCodigo(){
-
-        Usuario usuario = new Usuario();
-
-        valida.inserirDados();
+    private final ValidarEmail valida = new ValidarEmail();
+    public void enviarCodigo(String email){
+        var code = id.id();
+        valida.inserirDados(code);
 
         SendEmail sendEmail = new SendEmail("jefiroo@gmail.com","wvex akeb nbbu idmm");
 
         var sessao = sendEmail.iniciarSessao();
-        var mensagem = CORPO + CORPO2 +this.valida.toString()+ CORPO3;
-        var enviaMsg = sendEmail.criarMenssagem(sessao, usuario.getGmail(),ASSUNTO,mensagem);
+        var mensagem = CORPO + CORPO2 +code+ CORPO3;
+        var enviaMsg = sendEmail.criarMenssagem(sessao, email,ASSUNTO,mensagem);
 
         sendEmail.enviarMenssagem(enviaMsg);
     }
-    public void verificarCodigo(){
+    public boolean verificarCodigo(String codigo){
         valida.buscarDados();
-        boolean val = valida.validarCodigo();
-        System.out.println(val);
+
+        boolean val = valida.validarCodigo(codigo);
+
+        return val;
     }
 }

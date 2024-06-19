@@ -3,25 +3,25 @@ package com.jefiro.modelos;
 import com.jefiro.generete.IdGenerete;
 
 public class Usuario {
+    private IdGenerete id = new IdGenerete();
     private String nome;
     private String senha;
     private String gmail;
     private String telefone;
     private String cpf;
     private String aniversario;
-    private String idUsuario;
+    private final String idUsuario = id.id();
 
     public Usuario() {
     }
 
-    public Usuario(String nome, String senha, String gmail, String telefone, String celular, String cpf, String aniversario, String idUsuario) {
+    public Usuario(String nome, String senha, String gmail, String telefone, String celular, String cpf, String aniversario) {
         this.nome = nome;
         this.senha = senha;
         this.gmail = gmail;
         this.telefone = telefone;
         this.cpf = cpf;
         this.aniversario = aniversario;
-        this.idUsuario = idUsuario;
     }
 
     public String getAniversario() {
@@ -33,8 +33,7 @@ public class Usuario {
     }
 
     public String getIdUsuario() {
-        IdGenerete id = new IdGenerete();
-        return id.id();
+        return this.idUsuario;
     }
 
     public String getNome() {

@@ -11,10 +11,9 @@ public class ValidarEmail extends Usuario {
     private final SQL SQL = new SQL("cadadstroUsuario", "jefiro", "admin");
     private final ValidaTempo TEMPO = new ValidaTempo();
     private ResultSet resultSet;
-    private String codigo;
     private String dataAtual;
 
-    public void inserirDados() {
+    public void inserirDados(String codigo) {
         SQL.conectar();
         var comando = "INSERT INTO validaEmail (idUsuario, codigo, dataAtual, dataExpira)";
         var values = String.format("VALUES ('%s', '%s', '%s', '%s')", getIdUsuario(), codigo, TEMPO.pegarData(), TEMPO.expiraData());
@@ -28,18 +27,18 @@ public class ValidarEmail extends Usuario {
         resultSet = SQL.insertGetter(querry);
         return resultSet;
     }
-    public boolean validarCodigo(){
+    public boolean validarCodigo(String codigo){
         try {
             if (resultSet.next()) {
                 var id = resultSet.getString("idUsuario");
-                var codigo = resultSet.getString("codigo");
+                var codigodb = resultSet.getString("codigo");
                 var dataExpira = resultSet.getString("dataExpira");
 
                 if (id != null || codigo != null || dataAtual != null) {
                     if (getIdUsuario().equalsIgnoreCase(id)) {
                         var hora1 = TEMPO.pegarData();
                         if (TEMPO.comparaHoras(hora1, dataExpira)) {
-                            return this.codigo.equalsIgnoreCase(codigo);
+                            return codigo.equalsIgnoreCase(codigodb);
                         }
                     }
                 }
@@ -50,17 +49,6 @@ public class ValidarEmail extends Usuario {
         }
     }
 
-    public ValidarEmail(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
 
     public String getDataAtual() {
         return dataAtual;
@@ -70,8 +58,7 @@ public class ValidarEmail extends Usuario {
         this.dataAtual = dataAtual;
     }
 
-    @Override
-    public String toString() {
-        return codigo;
+    public ValidaTempo getTEMPO() {
+        return TEMPO;
     }
 }

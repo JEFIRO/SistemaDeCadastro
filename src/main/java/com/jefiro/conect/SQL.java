@@ -1,7 +1,6 @@
 package com.jefiro.conect;
 
 import java.sql.*;
-
 public class SQL {
     public SQL(String banco,String user, String password) {
         this.CAMINHO = "jdbc:sqlserver://localhost:1433;databaseName="+banco;
@@ -17,9 +16,7 @@ public class SQL {
         try {
             String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
             System.setProperty("jdbc.drivers", DRIVER);
-            System.out.println(CAMINHO);
             connection = DriverManager.getConnection(CAMINHO, USER, PASSWORD);
-            System.out.println("Conectado");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -28,7 +25,6 @@ public class SQL {
     public void close(){
         try {
             connection.close();
-            System.out.println("fechado");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -37,7 +33,6 @@ public class SQL {
         try {
             connection.createStatement().executeUpdate(query);
             connection.createStatement().close();
-            System.out.println("sucesso");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
