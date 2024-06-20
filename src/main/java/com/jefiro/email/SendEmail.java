@@ -3,31 +3,35 @@ package com.jefiro.email;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.Map;
 import java.util.Properties;
 
 public class SendEmail {
-
     private static final String USER = System.getenv("userGmail");
     private static final String PASSWORD = System.getenv("passGmail");
 
     public Session iniciarSessao() {
-        System.out.println(USER);
-        System.out.println(PASSWORD);
-        String host = "smtp.gmail.com";
-        String port = "587";
+        try {
+            System.out.println(USER);
+            System.out.println(PASSWORD);
+            String host = "smtp.gmail.com";
+            String port = "587";
 
-        Properties props = new Properties();
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", port);
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
+            Properties props = new Properties();
+            props.put("mail.smtp.host", host);
+            props.put("mail.smtp.port", port);
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
 
-        return Session.getInstance(props, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(USER, PASSWORD);
-            }
-        });
+            return Session.getInstance(props, new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(USER, PASSWORD);
+                }
+            });
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     public Message criarMenssagem(Session session, String email, String assunto, String corpo) {
@@ -46,8 +50,8 @@ public class SendEmail {
     public void enviarMenssagem(Message message) {
         try {
             Transport.send(message);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
+        } catch (MessagingException | RuntimeException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

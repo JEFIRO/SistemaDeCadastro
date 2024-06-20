@@ -51,7 +51,7 @@ public class SistemaDeCadastroApplication {
 			}
 
 			System.out.println("verifique seu email, você ira receber um codigo de 6 digitos.Validos por 15 minutos");
-			emailMain.enviarCodigo(email);
+			emailMain.enviarCodigo("jefefrs@gmail.com");
 			System.out.println("insira o codigo enviado para o seu email: ");
 			var codigo = sc.nextLine();
 			var verificar = emailMain.verificarCodigo(codigo);

@@ -15,32 +15,34 @@ public class SQL {
             String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
             System.setProperty("jdbc.drivers", DRIVER);
             connection = DriverManager.getConnection(CAMINHO, USER, PASSWORD);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("conectado");
+        } catch (SQLException | RuntimeException e) {
+            System.out.println(e.getMessage());
         }
     }
     public void close(){
         try {
             connection.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException | RuntimeException e) {
+            System.out.println(e.getMessage());
         }
     }
     public void insert(String query){
         try {
-            connection.createStatement().executeUpdate(query);
-            connection.createStatement().close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+            statement.close();
+        } catch (SQLException | RuntimeException e) {
+            System.out.println(e.getMessage());
         }
     }
-    public ResultSet insertGetter(String sql){
+    public ResultSet insertGetter(String query){
         try {
             Statement statement = connection.createStatement();
-            return statement.executeQuery(sql);
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao consultar dados no banco de dados", e);
+            return statement.executeQuery(query);
+        } catch (SQLException | RuntimeException e) {
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 }
