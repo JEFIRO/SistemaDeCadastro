@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ValidarEmail extends Usuario {
-    private final SQL SQL = new SQL("cadadstroUsuario", "jefiro", "admin");
+    private final SQL SQL = new SQL();
     private final ValidaTempo TEMPO = new ValidaTempo();
     private ResultSet resultSet;
     private String dataAtual;
@@ -19,6 +19,7 @@ public class ValidarEmail extends Usuario {
         var values = String.format("VALUES ('%s', '%s', '%s', '%s')", getIdUsuario(), codigo, TEMPO.pegarData(), TEMPO.expiraData());
         SQL.insert(comando + values);
         SQL.close();
+        System.out.println("ok inserirdados");
     }
 
     public ResultSet buscarDados() {
@@ -48,16 +49,6 @@ public class ValidarEmail extends Usuario {
             throw new RuntimeException(e);
         }
     }
-
-
-    public String getDataAtual() {
-        return dataAtual;
-    }
-
-    public void setDataAtual(String dataAtual) {
-        this.dataAtual = dataAtual;
-    }
-
     public ValidaTempo getTEMPO() {
         return TEMPO;
     }

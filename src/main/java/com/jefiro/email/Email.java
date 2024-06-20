@@ -14,7 +14,7 @@ public class Email {
         var code = id.id();
         valida.inserirDados(code);
 
-        SendEmail sendEmail = new SendEmail("jefiroo@gmail.com","wvex akeb nbbu idmm");
+        SendEmail sendEmail = new SendEmail();
 
         var sessao = sendEmail.iniciarSessao();
         var mensagem = CORPO + CORPO2 +code+ CORPO3;

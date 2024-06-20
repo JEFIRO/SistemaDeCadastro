@@ -2,18 +2,16 @@ package com.jefiro.conect;
 
 import java.sql.*;
 public class SQL {
-    public SQL(String banco,String user, String password) {
-        this.CAMINHO = "jdbc:sqlserver://localhost:1433;databaseName="+banco;
-        this.USER = user;
-        this.PASSWORD = password;
-    }
-
-    private  final String CAMINHO;
-    private final String USER;
-    private final String PASSWORD;
+    private static final String CAMINHO = System.getenv("pathSQL");
+    private static final String USER = System.getenv("userSQL");
+    private static final String PASSWORD = System.getenv("passwordSQL");
     private Connection connection;
+
     public void conectar(){
         try {
+            System.out.println(CAMINHO);
+            System.out.println(USER);
+            System.out.println(PASSWORD);
             String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
             System.setProperty("jdbc.drivers", DRIVER);
             connection = DriverManager.getConnection(CAMINHO, USER, PASSWORD);

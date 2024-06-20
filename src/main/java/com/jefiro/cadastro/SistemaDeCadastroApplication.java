@@ -2,6 +2,7 @@ package com.jefiro.cadastro;
 
 import com.jefiro.conect.SQL;
 import com.jefiro.email.Email;
+import com.jefiro.email.SendEmail;
 import com.jefiro.modelos.Usuario;
 import com.jefiro.validacao.ValidaTempo;
 import com.jefiro.validacao.ValidarCpf;
@@ -20,7 +21,7 @@ public class SistemaDeCadastroApplication {
 		ValidarCpf validarCpf = new ValidarCpf();
 		ValidaTempo tempo = new ValidaTempo();
 		Email emailMain = new Email();
-		SQL sql = new SQL("cadadstroUsuario", "jefiro", "admin");
+		SQL sql = new SQL();
 		System.out.println("Bem vindo");
 		while (true){
 			System.out.println("Adicione seu nome");
@@ -70,5 +71,12 @@ public class SistemaDeCadastroApplication {
 				System.out.println("tennte novamente");
 			}
 		}
+
+
+
+
+
+
+
 	}
 }

@@ -3,18 +3,17 @@ package com.jefiro.email;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Map;
 import java.util.Properties;
 
 public class SendEmail {
-    public SendEmail(String user, String password) {
-        this.USER = user;
-        this.PASSWORD = password;
-    }
 
-    private final String USER;
-    private final String PASSWORD;
+    private static final String USER = System.getenv("userGmail");
+    private static final String PASSWORD = System.getenv("passGmail");
 
     public Session iniciarSessao() {
+        System.out.println(USER);
+        System.out.println(PASSWORD);
         String host = "smtp.gmail.com";
         String port = "587";
 
